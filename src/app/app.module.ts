@@ -10,7 +10,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { MessagesListComponent } from './message/messages-list/messages-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatButtonModule, MatProgressSpinnerModule, MatListModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -29,6 +29,9 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserAnimationsModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    MatListModule,
+    MatFormFieldModule,
+    MatInputModule,
     AppRoutingModule
   ],
   providers: [

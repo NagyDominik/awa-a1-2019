@@ -1,21 +1,46 @@
-<div *ngIf="!messages">
-  <mat-spinner></mat-spinner>
-</div>
-
-<div *ngIf="messages">
-  <div class="row">
-    <div class="column">
-
+<div>
+  <div fxLayout="row" fxFill>
+    <div fxLayout="column" fxFlex="50">
+      <div class="mat-h1" fxLayoutAlign="center center">New Message</div>
+      <div class="mat-h1" fxFlex="100" fxLayoutAlign="center center" fxLayout="column" fxLayoutGap="10px">
+        <div fxFlex="50" fxLayout="column" fxLayoutAlign="start center">
+          <p class="mat-display-1" style="min-height: 40px; min-width: 100%;">{{humanReadableMessage}}</p>
+          <p class="mat-h1" style="min-height: 32px; min-width: 100%;">{{message}}</p>
+          <button mat-raised-button style="margin-top: 50px; width: 150px;" (click)="send()"> Send Message </button>
+        </div>
+        <div fxFlex="50" fxLayoutAlign="center center" fxLayout="column" fxLayoutGap="10px">
+          <div fxLayoutGap="10px">
+            <button mat-raised-button (click)="dash()"> - </button>
+            <button mat-raised-button (click)="space()"> Space </button>
+            <button mat-raised-button (click)="dot()"> . </button>
+          </div>
+          <div fxLayoutGap="10px">
+            <button mat-raised-button (click)="next()"> Next Character </button>
+            <button mat-raised-button (click)="clear()"> Clear </button>
+            <button mat-raised-button (click)="backspace()"> Backspace </button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="column">
-      <img alt="Angular Logo" src="http://www.codebug.org.uk/assets/steps/540/image_1.png">
+    <div fxLayout="column" fxFlex="50" fxLayoutAlign="center center">
+      <img alt="Alphabet" src="http://www.codebug.org.uk/assets/steps/540/image_1.png" width="442px" height="415px">
     </div>
   </div>
-  <div class="row">
-    <div class="column">
-      <h2>Total messages: {{message?.length}}</h2>
-      <h4 *ngFor="let message of messages">{{message.time | date:'d MMMM, yyyy'}} -
-        {{convertMessage(message.message)}}</h4>
+
+  <div fxLayout="row">
+    <div fxLayout="column" fxFlex="100">
+      <div class="mat-h1">Total messages: {{messages?.length}}</div>
+      <div fxFill fxLayout="row" fxLayoutAlign="center">
+        <div *ngIf="!messages">
+          <mat-spinner></mat-spinner>
+        </div>
+        <mat-list fxFlex="70" class="mat-elevation-z2 mat-body" style="background-color: darkgrey" *ngIf="messages">
+          <mat-list-item *ngFor="let message of messages | async">
+            <p class="mat-h2" mat-line>{{convertMessage(message.message)}}</p>
+            <p class="mat-h4" mat-line>{{message.time.toDate() | date:'d MMMM, yyyy'}}</p>
+          </mat-list-item>
+        </mat-list>
+      </div>
     </div>
   </div>
 </div>

@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Routes, RouterModule } from '@angular/router';
+import { MessagesListComponent } from './message/messages-list/messages-list.component';
+
+const routes: Routes = [
+  { path: '', component: MessagesListComponent },
+  { path: '**', redirectTo: ''}
+];
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

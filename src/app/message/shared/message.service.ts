@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore} from '@angular/fire/firestore';
-import {Observable} from 'rxjs/internal/Observable';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable()
 export class MessageService {
@@ -23,14 +23,13 @@ export class MessageService {
   addMessage(time: Date, message: any): Promise<any> {
     if (time && this.messageOk(message)) {
       const messageCollection = this.db.collection<any>('messages');
-      return messageCollection.add({time: time, message: message});
+      return messageCollection.add({ time: time, message: message });
     } else {
       return new Promise((resolve, reject) => {
         reject('Value is not a valid morse code');
       });
     }
   }
-
 
   getReverseMorseAlphabet() {
     return {
