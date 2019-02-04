@@ -1,11 +1,20 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { MessageService } from '../shared/message.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { MessageService } from '../../shared/message.service';
 
 @Component({
   selector: 'app-messages-list',
   templateUrl: './messages-list.component.html',
-  styleUrls: ['./messages-list.component.scss']
+  styleUrls: ['./messages-list.component.scss'],
+  animations: [
+    trigger('slide', [
+      transition(':enter', [
+        style({transform: 'translateY(-10%)', opacity: 0}),
+        animate('200ms ease-in', style({transform: 'translateX(0%)', opacity: 1}))
+      ])
+    ])
+  ]
 })
 export class MessagesListComponent {
   title = 'Morse App';
@@ -17,13 +26,9 @@ export class MessagesListComponent {
   time: number;
 
   constructor(private messageService: MessageService) {
-    this.messages = this.messageService.getMessagesLastByLimit(5)
-    /*.subscribe(messages => {
-      this.messages = messages;
-      this.latest = messages[0];
-    });*/
+    this.messages = this.messageService.getMessagesLastByLimit(10);
   }
-  
+
   convertMessage(message: string): string {
     return this.messageService.convertToText(message);
   }
@@ -38,11 +43,11 @@ export class MessagesListComponent {
     this.clear();
   }
 
-  dot(){
+  dot() {
     this.message += '.';
   }
 
-  dash(){
+  dash() {
     this.message += '-';
   }
 
